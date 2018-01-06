@@ -33,16 +33,19 @@ class PlaySoundsViewController: UIViewController {
         super.viewDidLoad()
         print(recordedAudioURL)
         setupAudio()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI(.notPlaying)
+        squeeshButtons()
     }
+    
 
     @IBAction func playSoundForButton(_ sender: UIButton) {
         print("Play Sound Button Pressed")
-        
+
         switch(ButtonType(rawValue: sender.tag)!) {
         case .slow:
             playSound(rate: 0.5)
@@ -57,7 +60,7 @@ class PlaySoundsViewController: UIViewController {
         case .reverb:
             playSound(reverb: true)
         }
-        
+
         configureUI(.playing)
 
     }
@@ -65,6 +68,22 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func stopButtonPressed(_ sender: AnyObject) {
         print("Stop Audio Button Pressed")
         stopAudio()
+    }
+    
+    func squeeshButtons(){
+        var buttons =  [UIButton]()
+        
+        buttons.append(snailButton)
+        buttons.append(chipmunkButton)
+        buttons.append(rabbitButton)
+        buttons.append(vaderButton)
+        buttons.append(echoButton)
+        buttons.append(reverbButton)
+        buttons.append(stopButton)
+        
+        for btn in buttons {
+            btn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        }
     }
 
 }
